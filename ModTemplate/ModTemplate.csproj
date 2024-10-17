@@ -11,7 +11,7 @@
   <Target Name="UserFile" AfterTargets="PreBuildEvent">
     <Copy
       Condition="!Exists('.\$(MSBuildProjectDir)\$(ModName).csproj.user')"
-      SourceFiles=".\$(MSBuildProjectDir)\Resources\Template.csproj.user"
+      SourceFiles="..\$(MSBuildProjectDir)\Resources\Template.csproj.user"
       DestinationFiles=".\$(MSBuildProjectDir)\$(ModName).csproj.user"/>
     <Error
       Condition="$(GameDir)==''"
