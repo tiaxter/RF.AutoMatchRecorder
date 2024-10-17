@@ -2,7 +2,7 @@
  A Rhythm Festival mod template for developing new mods.
  
 # Requirements
- Visual Studio 2022 or newer
+ Visual Studio 2022 or newer\
  Taiko no Tatsujin: Rhythm Festival
  
  
@@ -22,7 +22,7 @@
  - Within that folder, ModTemplate.csproj
  
  Now open the solution itself\
- In the .csproj file (double click the <ModName> project in solution explorer)\
+ In the .csproj file (double click the <ModName> project in solution explorer)
  - Change ModName to your ModName
  - Change the description to whatever your mod does (Or remember to do this later)
  - Change ModVersion to a fitting version in the format of x.x.x (or whatever your preference is)
