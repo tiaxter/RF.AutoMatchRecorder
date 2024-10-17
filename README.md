@@ -27,7 +27,7 @@
  - Change the description to whatever your mod does (Or remember to do this later)
  - Change ModVersion to a fitting version in the format of x.x.x (or whatever your preference is)
 
- In Plugin.cs\
+ In Plugin.cs
  - Change the namespace to what you selected as RootNamespace earlier
     - In Visual Studio, you can highlight the namespace, hit Ctrl + R, Ctrl + R, and enter your new namespace to change all instances of it. 
     - You can change the namespaces in the 2 example patches as well, to RootNamespace.Patches
