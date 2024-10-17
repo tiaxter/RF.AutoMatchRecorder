@@ -7,6 +7,16 @@
     <ModName>ModTemplate</ModName>
     <ModVersion>0.0.1</ModVersion>
   </PropertyGroup>
+  
+  <Target Name="UserFile" AfterTargets="PreBuildEvent">
+	<Copy
+	  Condition="!Exists('.\$(MSBuildProjectDir)\$(ModName).csproj.user')"
+	  SourceFiles=".\$(MSBuildProjectDir)\Resources\Template.csproj.user"
+	  DestinationFiles=".\$(MSBuildProjectDir)\$(ModName).csproj.user"/>
+	<Error
+	  Condition="$(GameDir)==''"
+	  Text="Set the GameDir variable in .csproj.user file to your Rhythm Festival executable directory."/>
+  </Target>
 
   <PropertyGroup>
     <AssemblyName>com.DB.RF.$(ModName)</AssemblyName>
