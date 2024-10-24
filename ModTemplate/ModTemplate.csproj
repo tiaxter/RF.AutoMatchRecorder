@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ModName>ModTemplate</ModName>
     <ModVersion>0.0.1</ModVersion>
+    <Description>A Rhythm Festival template for mod creation.</Description>
   </PropertyGroup>
   
   <Target Name="UserFile" AfterTargets="PreBuildEvent">
@@ -20,7 +21,6 @@
 
   <PropertyGroup>
     <AssemblyName>com.DB.RF.$(ModName)</AssemblyName>
-    <Description>A Rhythm Festival template for mod creation.</Description>
     <Version>$(ModVersion)</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
