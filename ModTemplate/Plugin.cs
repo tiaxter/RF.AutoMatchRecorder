@@ -21,8 +21,8 @@ namespace ModTemplate
 
 
         public ConfigEntry<bool> ConfigEnabled;
-        public ConfigEntry<string> ConfigSongTitleLanguageOverride;
-        public ConfigEntry<float> ConfigFlipInterval;
+        //public ConfigEntry<string> ConfigSongTitleLanguageOverride;
+        //public ConfigEntry<float> ConfigFlipInterval;
 
 
 
@@ -45,15 +45,15 @@ namespace ModTemplate
                 true,
                 "Enables the mod.");
 
-            ConfigSongTitleLanguageOverride = Config.Bind("General",
-                "SongTitleLanguageOverride",
-                "JP",
-                "Sets the song title to the selected language. (JP, EN, FR, IT, DE, ES, TW, CN, KO)");
+            //ConfigSongTitleLanguageOverride = Config.Bind("General",
+            //    "SongTitleLanguageOverride",
+            //    "JP",
+            //    "Sets the song title to the selected language. (JP, EN, FR, IT, DE, ES, TW, CN, KO)");
 
-            ConfigFlipInterval = Config.Bind("General",
-                "FlipInterval",
-                3f,
-                "How quickly the difficulty flips between oni and ura.");
+            //ConfigFlipInterval = Config.Bind("General",
+            //    "FlipInterval",
+            //    3f,
+            //    "How quickly the difficulty flips between oni and ura.");
         }
 
         private void SetupHarmony()
@@ -65,9 +65,9 @@ namespace ModTemplate
             {
                 bool result = true;
                 // If any PatchFile fails, result will become false
-                result &= PatchFile(typeof(SwapJpEngTitlesPatch));
-                result &= PatchFile(typeof(AdjustUraFlipTimePatch));
-                SwapJpEngTitlesPatch.SetOverrideLanguages();
+                //result &= PatchFile(typeof(SwapJpEngTitlesPatch));
+                //result &= PatchFile(typeof(AdjustUraFlipTimePatch));
+                //SwapJpEngTitlesPatch.SetOverrideLanguages();
                 if (result)
                 {
                     Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} is loaded!");
@@ -109,9 +109,9 @@ namespace ModTemplate
         }
 
         public static MonoBehaviour GetMonoBehaviour() => TaikoSingletonMonoBehaviour<CommonObjects>.Instance;
-        public void StartCoroutine(IEnumerator enumerator)
+        public Coroutine StartCoroutine(IEnumerator enumerator)
         {
-            GetMonoBehaviour().StartCoroutine(enumerator);
+            return GetMonoBehaviour().StartCoroutine(enumerator);
         }
     }
 }

@@ -1,6 +1,8 @@
 # RF.ModTemplate
  A Rhythm Festival mod template for developing new mods.
  
+ <a href="taikomodmanager:insertGithubLinkhereAndReplaceWithUrlShortener"> <img src="Resources/InstallButton.png" alt="One-click Install using the Taiko Mod Manager" width="256"/> </a>
+ 
 # Requirements
  Visual Studio 2022 or newer\
  Taiko no Tatsujin: Rhythm Festival
@@ -8,7 +10,7 @@
  
 # How to use
  On github, click the "Use this template" button -> Create a new repository\
- Check "Include all branches", which is just a "main" and "dev" branch\
+ (Optional) Check "Include all branches", which is just a "main" and "dev" branch\
  Give a Repository name\
  Select Private or Public repository\
  Clone the repo locally
@@ -32,9 +34,17 @@
     - In Visual Studio, you can highlight the namespace, hit Ctrl + R, Ctrl + R, and enter your new namespace to change all instances of it. 
     - You can change the namespaces in the 2 example patches as well, to RootNamespace.Patches
  - Change public const string ModName = your ModName
+ 
+ Outside of code, edit the README.md file
+ - Change RF.ModTemplate to your mod's name
+ - Change the description.
+ - Change the "href="taikomodmanager:insertGithubLinkhereAndReplaceWithUrlShortener" to a shortened url in the format of "taikomodmanager:https://github.com/"you"/"yourmodrepo"", allowing the use of the One Click Mod Install button.
+ - Delete this "#How to use" section
+ - Make any other changes you feel like making
+ 
 
 # Build
- Install [BepInEx be 697](https://builds.bepinex.dev/projects/bepinex_be) or [BepInEx 6.0.0-pre.2](https://github.com/BepInEx/BepInEx/releases/tag/v6.0.0-pre.2) into your Rhythm Festival directory and launch the game.\
+ Install [BepInEx 6.0.0-pre.2](https://github.com/BepInEx/BepInEx/releases/tag/v6.0.0-pre.2) into your Rhythm Festival directory and launch the game.\
  This will generate all the dummy dlls in the interop folder that will be used as references.\
  Make sure you install the Unity.IL2CPP-win-x64 version.\
  Newer versions of BepInEx could have breaking API changes until the first stable v6 release, so those are not recommended at this time.
