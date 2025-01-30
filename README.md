@@ -38,7 +38,7 @@
  Outside of code, edit the README.md file
  - Change RF.ModTemplate to your mod's name
  - Change the description.
- - Change the "href="taikomodmanager:insertGithubLinkhereAndReplaceWithUrlShortener" to a shortened url in the format of "taikomodmanager:https://github.com/"you"/"yourmodrepo"", allowing the use of the One Click Mod Install button.
+ - Change the "href="taikomodmanager:insertGithubLinkhereAndReplaceWithUrlShortener" to a shortened url in the format of "taikomodmanager:https://github.com/<you\>/\<yourmodrepo\>", allowing the use of the One Click Mod Install button.
  - Delete this "#How to use" section
  - Make any other changes you feel like making
  
