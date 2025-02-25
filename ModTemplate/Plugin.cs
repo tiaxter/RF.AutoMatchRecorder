@@ -34,6 +34,16 @@ namespace ModTemplate
 
             SetupConfig();
             SetupHarmony();
+
+            // The try catch has to be here, rather than inside the AddToSaveManager function, for some reason
+            try
+            {
+                AddToSaveManager();
+            }
+            catch
+            {
+
+            }
         }
 
         private void SetupConfig()
@@ -61,12 +71,17 @@ namespace ModTemplate
             // Patch methods
             _harmony = new Harmony(MyPluginInfo.PLUGIN_GUID);
 
-            if (ConfigEnabled.Value)
+            LoadPlugin();
+        }
+
+        public static void LoadPlugin()
+        {
+            if (Instance.ConfigEnabled.Value)
             {
                 bool result = true;
                 // If any PatchFile fails, result will become false
-                //result &= PatchFile(typeof(SwapJpEngTitlesPatch));
-                //result &= PatchFile(typeof(AdjustUraFlipTimePatch));
+                //result &= Instance.PatchFile(typeof(SwapJpEngTitlesPatch));
+                //result &= Instance.PatchFile(typeof(AdjustUraFlipTimePatch));
                 //SwapJpEngTitlesPatch.SetOverrideLanguages();
                 if (result)
                 {
@@ -77,7 +92,7 @@ namespace ModTemplate
                     Log.LogError($"Plugin {MyPluginInfo.PLUGIN_GUID} failed to load.");
                     // Unload this instance of Harmony
                     // I hope this works the way I think it does
-                    _harmony.UnpatchSelf();
+                    Instance._harmony.UnpatchSelf();
                 }
             }
             else
@@ -106,6 +121,33 @@ namespace ModTemplate
                 Log.LogInfo(e.Message);
                 return false;
             }
+        }
+
+        public static void UnloadPlugin()
+        {
+            Instance._harmony.UnpatchSelf();
+            Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} has been unpatched.");
+        }
+
+        public static void ReloadPlugin()
+        {
+            // Reloading will always be completely different per mod
+            // You'll want to reload any config file or save data that may be specific per profile
+            // If there's nothing to reload, don't put anything here, and keep it commented in AddToSaveManager
+            //SwapSongLanguagesPatch.InitializeOverrideLanguages();
+            //TaikoSingletonMonoBehaviour<CommonObjects>.Instance.MyDataManager.MusicData.Reload();
+        }
+
+        public void AddToSaveManager()
+        {
+            // Add SaveDataManager path to your csproj.user file
+            // https://github.com/Deathbloodjr/RF.SaveProfileManager
+            PluginSaveDataInterface plugin = new PluginSaveDataInterface(MyPluginInfo.PLUGIN_GUID);
+            plugin.AssignLoadFunction(LoadPlugin);
+            plugin.AssignUnloadFunction(UnloadPlugin);
+            //plugin.AssignReloadSaveFunction(ReloadPlugin);
+            plugin.AddToManager();
+            //Logger.Log("Plugin added to SaveDataManager");
         }
 
         public static MonoBehaviour GetMonoBehaviour() => TaikoSingletonMonoBehaviour<CommonObjects>.Instance;
