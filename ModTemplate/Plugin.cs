@@ -7,6 +7,7 @@ using BepInEx.Configuration;
 using ModTemplate.Plugins;
 using UnityEngine;
 using System.Collections;
+using SaveProfileManager.Plugins;
 
 namespace ModTemplate
 {
