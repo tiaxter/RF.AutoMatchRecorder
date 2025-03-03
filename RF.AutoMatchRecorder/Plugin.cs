@@ -7,7 +7,6 @@ using BepInEx.Configuration;
 using RF.AutoMatchRecorder.Plugins;
 using UnityEngine;
 using System.Collections;
-using SaveProfileManager.Plugins;
 
 namespace RF.AutoMatchRecorder
 {
@@ -35,16 +34,6 @@ namespace RF.AutoMatchRecorder
 
             SetupConfig();
             SetupHarmony();
-
-            // The try catch has to be here, rather than inside the AddToSaveManager function, for some reason
-            try
-            {
-                AddToSaveManager();
-            }
-            catch
-            {
-
-            }
         }
 
         private void SetupConfig()
@@ -137,18 +126,6 @@ namespace RF.AutoMatchRecorder
             // If there's nothing to reload, don't put anything here, and keep it commented in AddToSaveManager
             //SwapSongLanguagesPatch.InitializeOverrideLanguages();
             //TaikoSingletonMonoBehaviour<CommonObjects>.Instance.MyDataManager.MusicData.Reload();
-        }
-
-        public void AddToSaveManager()
-        {
-            // Add SaveDataManager path to your csproj.user file
-            // https://github.com/Deathbloodjr/RF.SaveProfileManager
-            PluginSaveDataInterface plugin = new PluginSaveDataInterface(MyPluginInfo.PLUGIN_GUID);
-            plugin.AssignLoadFunction(LoadPlugin);
-            plugin.AssignUnloadFunction(UnloadPlugin);
-            //plugin.AssignReloadSaveFunction(ReloadPlugin);
-            plugin.AddToManager();
-            //Logger.Log("Plugin added to SaveDataManager");
         }
 
         public static MonoBehaviour GetMonoBehaviour() => TaikoSingletonMonoBehaviour<CommonObjects>.Instance;
