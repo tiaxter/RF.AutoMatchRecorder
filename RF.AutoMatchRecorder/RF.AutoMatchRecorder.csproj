@@ -37,6 +37,10 @@
     <PackageReference Include="BepInEx.PluginInfoProps" Version="2.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="RF.AutoMatchRecorder.csproj.user" />
+  </ItemGroup>
+
   <Target Name="PostBuildCopy" AfterTargets="PostBuildEvent" Condition="$(CopyOutputFiles) == true">
     <Copy SourceFiles="$(TargetDir)$(AssemblyName).dll" DestinationFolder="$(GameDir)\BepInEx\plugins\$(AssemblyName)" />
     <Copy Condition="$(DefineConstants.Contains('DEBUG'))" SourceFiles="$(TargetDir)$(AssemblyName).pdb" DestinationFolder="$(GameDir)\BepInEx\plugins\$(AssemblyName)" />
