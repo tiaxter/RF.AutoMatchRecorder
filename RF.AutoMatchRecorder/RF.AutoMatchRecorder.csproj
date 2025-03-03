@@ -24,8 +24,7 @@
     <Version>$(ModVersion)</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
-    <RootNamespace>$(ModName)</RootNamespace>
-    <PackageId>$(ModName)</PackageId>
+    <PackageId>RF.AutoMatchRecorder</PackageId>
     <PackageVersion>$(ModVersion)</PackageVersion>
     <Platforms>AnyCPU</Platforms>
   </PropertyGroup>

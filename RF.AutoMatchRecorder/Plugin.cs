@@ -4,17 +4,17 @@ using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using BepInEx.Configuration;
-using ModTemplate.Plugins;
+using RF.AutoMatchRecorder.Plugins;
 using UnityEngine;
 using System.Collections;
 using SaveProfileManager.Plugins;
 
-namespace ModTemplate
+namespace RF.AutoMatchRecorder
 {
     [BepInPlugin(MyPluginInfo.PLUGIN_GUID, ModName, MyPluginInfo.PLUGIN_VERSION)]
     public class Plugin : BasePlugin
     {
-        public const string ModName = "ModTemplate";
+        public const string ModName = "RF.AutoMatchRecorder";
 
         public static Plugin Instance;
         private Harmony _harmony = null;

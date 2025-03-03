@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using static MusicDataInterface;
 using static DataConst;
 
-namespace ModTemplate.Plugins
+namespace RF.AutoMatchRecorder.Plugins
 {
     internal class SwapJpEngTitlesPatch
     {

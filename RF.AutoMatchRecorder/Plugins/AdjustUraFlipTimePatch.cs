@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ModTemplate.Plugins
+namespace RF.AutoMatchRecorder.Plugins
 {
     internal class AdjustUraFlipTimePatch
     {
