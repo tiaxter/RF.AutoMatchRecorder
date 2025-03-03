@@ -31,6 +31,7 @@
 
   <ItemGroup>
     <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.697" />
+    <PackageReference Include="OBSClient" Version="2.1.1" />
     <Reference Include="$(GameDir)\BepInEx\interop\*.dll" Private="false" />
     <Reference Include="$(SaveProfileManagerPath)" Private="false" />
     <PackageReference Include="BepInEx.Analyzers" Version="1.0.8" PrivateAssets="all" />
@@ -39,6 +40,10 @@
 
   <ItemGroup>
     <Content Include="RF.AutoMatchRecorder.csproj.user" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modules\" />
   </ItemGroup>
 
   <Target Name="PostBuildCopy" AfterTargets="PostBuildEvent" Condition="$(CopyOutputFiles) == true">
