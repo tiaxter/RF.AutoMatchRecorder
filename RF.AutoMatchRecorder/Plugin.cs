@@ -21,9 +21,9 @@ namespace RF.AutoMatchRecorder
 
 
         public ConfigEntry<bool> ConfigEnabled;
-        //public ConfigEntry<string> ConfigSongTitleLanguageOverride;
-        //public ConfigEntry<float> ConfigFlipInterval;
-
+        public ConfigEntry<string> ConfigObsHost;
+        public ConfigEntry<int> ConfigObsPort;
+        public ConfigEntry<string> ConfigObsPassword;
 
 
         public override void Load()
@@ -45,15 +45,23 @@ namespace RF.AutoMatchRecorder
                 true,
                 "Enables the mod.");
 
-            //ConfigSongTitleLanguageOverride = Config.Bind("General",
-            //    "SongTitleLanguageOverride",
-            //    "JP",
-            //    "Sets the song title to the selected language. (JP, EN, FR, IT, DE, ES, TW, CN, KO)");
+            ConfigObsHost = Config.Bind("OBS",
+                "Host",
+                "127.0.0.1",
+                "Host of OBS web socket"
+            );
 
-            //ConfigFlipInterval = Config.Bind("General",
-            //    "FlipInterval",
-            //    3f,
-            //    "How quickly the difficulty flips between oni and ura.");
+            ConfigObsPort = Config.Bind("OBS",
+                "Port",
+                4455,
+                "Port of OBS web socket"
+            );
+
+            ConfigObsPassword = Config.Bind("OBS",
+                "Password",
+                "",
+                "Password for OBS web socket"
+            );
         }
 
         private void SetupHarmony()
