@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using HarmonyLib;
+using RF.AutoMatchRecorder.Modules;
 using Scripts.EnsoGame.Pause;
 // ReSharper disable InconsistentNaming
 
@@ -15,7 +16,8 @@ public class MatchRecorder
     [HarmonyWrapSafe]
     public static void ResultPlayer_ToWaitState_Prefix(ResultPlayer __instance)
     { 
-        // TODO: Stop record
+        // Stop record
+        Obs.Instance.StopRecord();
     }
 
     [HarmonyPatch(typeof(ResultPlayer))]
@@ -24,7 +26,8 @@ public class MatchRecorder
     [HarmonyPrefix]
     public static void ResultPlayer_waitResultDisp_Prefix(ResultPlayer __instance)
     {
-        // TODO: Stop record
+        // Stop record
+        Obs.Instance.StopRecord();
     }
     
     [HarmonyPatch(typeof(SongInfoLayOut))]
@@ -42,9 +45,11 @@ public class MatchRecorder
         {
             Logger.Log(songName);
 
-            // TODO: Stop record
+            // Stop record
+            Obs.Instance.StopRecord();
             
-            // TODO: Start record
+            // Start record
+            Obs.Instance.StartRecord(songName);
         }
     }
     
@@ -56,7 +61,8 @@ public class MatchRecorder
     [HarmonyWrapSafe]
     public static void UiPauseMenu_Open_Prefix(UiPauseMenu __instance)
     {
-        // TODO: Pause record
+        // Pause record
+        Obs.Instance.PauseRecord();
     }
     
     [HarmonyPatch(typeof(UiPauseMenu))]
@@ -66,7 +72,8 @@ public class MatchRecorder
     [HarmonyWrapSafe]
     public static void UiPauseMenu_Close_Prefix(UiPauseMenu __instance)
     {
-        // TODO: Resume record
+        // Resume record
+        Obs.Instance.ResumeRecord();
     }
     
     [HarmonyPatch(typeof(UiPauseMenu))]
@@ -76,6 +83,7 @@ public class MatchRecorder
     [HarmonyWrapSafe]
     public static void UiPauseMenu_Unbind_Prefix(UiPauseMenu __instance)
     {
-        // TODO: Stop record
+        // Stop record
+        Obs.Instance.StopRecord();
     }
 }
