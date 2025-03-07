@@ -24,6 +24,7 @@ namespace RF.AutoMatchRecorder
         public ConfigEntry<string> ConfigObsHost;
         public ConfigEntry<int> ConfigObsPort;
         public ConfigEntry<string> ConfigObsPassword;
+        public ConfigEntry<string> ConfigObsOutputVideoPath;
 
 
         public override void Load()
@@ -62,6 +63,12 @@ namespace RF.AutoMatchRecorder
                 "",
                 "Password for OBS web socket"
             );
+
+            ConfigObsOutputVideoPath = Config.Bind("OBS",
+                "OutputVideoPath",
+                dataFolder,
+                "Path of recorded video output"
+            );
         }
 
         private void SetupHarmony()
@@ -78,9 +85,8 @@ namespace RF.AutoMatchRecorder
             {
                 bool result = true;
                 // If any PatchFile fails, result will become false
-                //result &= Instance.PatchFile(typeof(SwapJpEngTitlesPatch));
-                //result &= Instance.PatchFile(typeof(AdjustUraFlipTimePatch));
-                //SwapJpEngTitlesPatch.SetOverrideLanguages();
+                result &= Instance.PatchFile(typeof(MatchRecorder));
+                
                 if (result)
                 {
                     Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_NAME} is loaded!");
