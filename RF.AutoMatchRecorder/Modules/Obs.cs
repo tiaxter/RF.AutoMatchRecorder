@@ -9,6 +9,7 @@ public class Obs
     private readonly ObsClient _client = new();
     
     private bool _isAuthenticated;
+    private bool _isConnected;
     private const int ConnectionTries = 10;
     
     public static Obs Instance
@@ -19,7 +20,7 @@ public class Obs
         }
     }
 
-    public Obs()
+    private Obs()
     {
         _client.PropertyChanged += (_, args) =>
         {
@@ -37,35 +38,43 @@ public class Obs
         var port = Plugin.Instance.ConfigObsPort.Value;
         var password = Plugin.Instance.ConfigObsPassword.Value;
 
-        var isConnected = await _client.ConnectAsync(true,
+        _isConnected = await _client.ConnectAsync(true,
             password,
             host,
             port
         );
 
-        if (!isConnected)
+        if (!_isConnected)
         {
-            throw new Exception("Failed to connect to OBS");
+            Logger.Log("Failed to connect to OBS");
+            return;
         }
 
         while (!_isAuthenticated && tries < ConnectionTries)
         {
-            await Task.Delay(100);
+            Thread.Sleep(100);
             tries++;
         }
 
         if (tries == ConnectionTries)
         {
-            throw new Exception("Failed to connect to OBS. Reach maximum number of tries");
+            Logger.Log("Failed to connect to OBS. Reach maximum number of tries");
         }
     }
 
     public async void StartRecord(string songName)
     {
+        var actionName = "Start record";
+        
         try
         {
-            Logger.Log("Starting record...");
-        
+            if (!_isConnected)
+            {
+                Connect();
+            }
+            
+            Logger.Log(actionName);
+
             RequestBatchMessage batch = new();
             batch.AddSetRecordDirectoryRequest(GenerateOutputPath(songName));
             batch.AddSleepRequest(200, null);
@@ -75,16 +84,23 @@ public class Obs
         }
         catch (Exception ex)
         {
-            Logger.Log($"Start recording failed: {ex.Message}");
+            Logger.Log($"{actionName}: {ex.Message}");
         }
     }
 
     public async void StopRecord()
     {
+        var actionName = "Stop record";
+        
         try
         {
-            Logger.Log("Stop recording...");
+            if (!_isConnected)
+            {
+                Connect();
+            }
             
+            Logger.Log(actionName);
+
             RequestBatchMessage batch = new();
             batch.AddStopRecordRequest();
             batch.AddSleepRequest(200, null);
@@ -92,34 +108,49 @@ public class Obs
         }
         catch (Exception ex)
         {
-            Logger.Log($"Stop recording failed: {ex.Message}");
+            Logger.Log($"{actionName}: {ex.Message}");
         }
-        
     }
 
     public async void PauseRecord()
     {
-        try
-        {
-            Logger.Log("Pause recording...");
-            await _client.PauseRecord();
-        }
-        catch (Exception ex)
-        {
-            Logger.Log($"Pause recording failed: {ex.Message}");
-        }
+         var actionName = "Stop record";
+         
+         try
+         {
+             if (!_isConnected)
+             {
+                 Connect();
+             }
+             
+             Logger.Log(actionName);
+
+             await _client.PauseRecord();
+         }
+         catch (Exception ex)
+         {
+             Logger.Log($"{actionName}: {ex.Message}");
+         }
     }
 
     public async void ResumeRecord()
     {
+        var actionName = "Resume record";
+
         try
         {
-            Logger.Log("Resume recording...");
+            if (!_isConnected)
+            {
+                Connect();
+            }
+
+            Logger.Log(actionName);
+
             await _client.ResumeRecord();
         }
         catch (Exception ex)
         {
-            Logger.Log($"Resume recording failed: {ex.Message}");
+            Logger.Log($"{actionName}: {ex.Message}");
         }
     }
     
